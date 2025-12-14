@@ -9,7 +9,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
     stepperActive: '#000',
-    stepperInactive: '#737373'
+    stepperInactive: '#737373',
+    tabBarInactive: '#707070'
   },
   dark: {
     text: '#fff',
@@ -18,6 +19,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     stepperActive: '#fff',
-    stepperInactive: '#737373'
+    stepperInactive: '#737373',
+    tabBarInactive: '#707070'
   }
 };

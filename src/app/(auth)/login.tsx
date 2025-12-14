@@ -1,10 +1,10 @@
 import { HeaderWithStepper } from '@/components/header-with-stepper';
 import { NoiseOverlay } from '@/components/noise-overlay';
 import { Button } from '@/components/ui/button';
-import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { View } from '@/components/view';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
@@ -33,7 +33,7 @@ export default function LoginScreen() {
           <Text style={styles.welcomeText}>¡Bienvenido a mbaretrain!</Text>
           <Text style={styles.subtitleText}>Inicia sesión o registrate para comenzar.</Text>
           <Button style={styles.button} onPress={() => handleLogin('GOOGLE')}>
-            <Icon name='logo-google' size={24} />
+            <Ionicons name='logo-google' size={24} color='white' />
             <Text>Continuar con Google</Text>
           </Button>
         </View>

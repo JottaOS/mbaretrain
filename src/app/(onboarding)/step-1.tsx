@@ -19,7 +19,7 @@ export default function OnboardingOne() {
 
   return (
     <View style={styles.container}>
-      <NoiseOverlay />
+      <NoiseOverlay opacity={0.5} />
       <SafeAreaView style={styles.content}>
         <HeaderWithStepper steps={4} activeStep={2} />
         <View style={styles.mainContainer}>
