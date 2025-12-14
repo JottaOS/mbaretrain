@@ -1,35 +1,34 @@
-import { Stepper } from '@/components/stepper';
+import { HeaderWithStepper } from '@/components/header-with-stepper';
+import { NoiseOverlay } from '@/components/noise-overlay';
 import { Button } from '@/components/ui/button';
 import { Icon } from '@/components/ui/icon';
 import { Text } from '@/components/ui/text';
 import { View } from '@/components/view';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const backgroundImage = require('@/assets/images/login-bg.webp');
 
 export default function LoginScreen() {
+  const router = useRouter();
   const bgColor = useThemeColor({}, 'background');
 
   const handleLogin = (provider: 'GOOGLE' | 'FACEBOOK') => {
     console.log(provider);
+    router.push('/(onboarding)/step-1');
   };
 
   return (
     <View style={styles.wrapper}>
-      <Image source={backgroundImage} style={styles.backgroundImage} resizeMode='cover' />
-      <LinearGradient
-        colors={['transparent', 'transparent', bgColor]}
-        locations={[0, 0.2, 1]}
-        style={styles.gradientOverlay}
-      />
+      <Image source={backgroundImage} style={styles.backgroundImage} contentFit='cover' />
+      <LinearGradient colors={['#37373700', bgColor]} locations={[0, 1]} style={styles.gradientOverlay} />
+      <NoiseOverlay />
       <SafeAreaView style={styles.container}>
-        <View style={styles.headerRow}>
-          <Text style={styles.headerText}>mbaretrain</Text>
-          <Stepper steps={4} activeStep={1} containerStyle={styles.stepperContainer} />
-        </View>
+        <HeaderWithStepper steps={4} activeStep={1} />
         <View style={styles.contentContainer}>
           <Text style={styles.welcomeText}>¡Bienvenido a mbaretrain!</Text>
           <Text style={styles.subtitleText}>Inicia sesión o registrate para comenzar.</Text>
@@ -66,30 +65,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%'
   },
-  headerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    maxWidth: '100%'
-  },
-  headerText: {
-    fontFamily: 'Inter',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: 12,
-    lineHeight: 14
-  },
+
   contentContainer: {
     justifyContent: 'center',
     marginBottom: 48
   },
-  stepperContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    height: '100%',
-    justifyContent: 'space-between',
-    gap: 6,
-    width: 136
-  },
+
   welcomeText: {
     fontSize: 36
   },

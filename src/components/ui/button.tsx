@@ -5,11 +5,12 @@ import { Pressable, StyleSheet } from 'react-native';
 export type ButtonProps = ThemeProps &
   ComponentProps<typeof Pressable> & {
     children: React.ReactNode;
+    variant?: 'outline' | 'ghost';
   };
 
 export const Button = (props: ButtonProps) => {
   const textColor = useThemeColor({ light: props.lightColor, dark: props.darkColor }, 'text');
-  const { children, style, ...rest } = props;
+  const { children, style, variant = 'outline', ...rest } = props;
 
   return (
     <Pressable
@@ -17,6 +18,7 @@ export const Button = (props: ButtonProps) => {
       style={state => [
         styles.container,
         { borderColor: textColor },
+        styles[variant],
         typeof style === 'function' ? style(state) : style
       ]}
     >
@@ -35,5 +37,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 8,
     borderWidth: 1
+  },
+  outline: {
+    backgroundColor: 'transparent',
+    color: 'white'
+  },
+  ghost: {
+    borderWidth: 0,
+    color: 'white'
   }
 });
