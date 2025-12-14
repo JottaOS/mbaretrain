@@ -2,9 +2,8 @@ import { HeaderWithStepper } from '@/components/header-with-stepper';
 import { NoiseOverlay } from '@/components/noise-overlay';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { View } from '@/components/view';
 import { useRouter } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function OnboardingThree() {

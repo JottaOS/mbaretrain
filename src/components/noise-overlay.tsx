@@ -1,6 +1,5 @@
-import { View } from '@/components/view';
 import { Image } from 'expo-image';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 const noiseTexture = require('@/assets/images/noise.webp');
 

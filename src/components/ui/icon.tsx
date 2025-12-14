@@ -1,4 +1,4 @@
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { colors } from '@/constants/colors';
 import { Octicons } from '@expo/vector-icons';
 import { ComponentProps } from 'react';
 
@@ -9,6 +9,5 @@ interface IconProps {
 }
 
 export const Icon = ({ name, size, color }: IconProps) => {
-  const textColor = useThemeColor({}, 'text');
-  return <Octicons name={name} size={size} color={color || textColor} />;
+  return <Octicons name={name} size={size} color={color || colors.text} />;
 };

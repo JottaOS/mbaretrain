@@ -1,17 +1,14 @@
 import { Icon } from '@/components/ui/icon';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { colors } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
 
 export default function TabLayout() {
-  const tintColor = useThemeColor({}, 'tint');
-  const tabBarInactiveTintColor = useThemeColor({}, 'tabBarInactive');
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: tintColor,
-        tabBarInactiveTintColor: tabBarInactiveTintColor,
+        tabBarActiveTintColor: colors.tint,
+        tabBarInactiveTintColor: colors.tabBarInactive,
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: 'transparent',

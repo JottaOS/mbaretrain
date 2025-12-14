@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Stepper } from './stepper';
 import { Text } from './ui/text';
-import { View } from './view';
 
 interface HeaderWithStepperProps {
   steps: number;

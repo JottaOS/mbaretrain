@@ -1,6 +1,5 @@
-import { View } from '@/components/view';
-import colors from '@/constants/colors';
-import { StyleProp, StyleSheet, useColorScheme, ViewStyle } from 'react-native';
+import { colors } from '@/constants/colors';
+import { StyleProp, StyleSheet, useColorScheme, View, ViewStyle } from 'react-native';
 
 interface StepperProps {
   steps: number;
@@ -15,7 +14,6 @@ export const Stepper = ({ steps, activeStep, containerStyle }: StepperProps) => 
     throw new Error('Active step is out of bounds');
   }
 
-  const themeColors = theme === 'dark' ? colors.dark : colors.light;
   return (
     <View style={[styles.stepperContainer, containerStyle]}>
       {Array.from({ length: steps }, (_, index) => (
@@ -23,7 +21,7 @@ export const Stepper = ({ steps, activeStep, containerStyle }: StepperProps) => 
           key={index}
           style={[
             styles.stepperSegment,
-            { backgroundColor: index === activeStep - 1 ? themeColors.stepperActive : themeColors.stepperInactive }
+            { backgroundColor: index === activeStep - 1 ? colors.stepperActive : colors.stepperInactive }
           ]}
         />
       ))}

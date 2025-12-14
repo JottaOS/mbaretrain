@@ -2,20 +2,18 @@ import { HeaderWithStepper } from '@/components/header-with-stepper';
 import { NoiseOverlay } from '@/components/noise-overlay';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { View } from '@/components/view';
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { colors } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const backgroundImage = require('@/assets/images/login-bg.webp');
 
 export default function LoginScreen() {
   const router = useRouter();
-  const bgColor = useThemeColor({}, 'background');
 
   const handleLogin = (provider: 'GOOGLE' | 'FACEBOOK') => {
     console.log(provider);
@@ -25,7 +23,7 @@ export default function LoginScreen() {
   return (
     <View style={styles.wrapper}>
       <Image source={backgroundImage} style={styles.backgroundImage} contentFit='cover' />
-      <LinearGradient colors={['#37373700', bgColor]} locations={[0, 1]} style={styles.gradientOverlay} />
+      <LinearGradient colors={['#37373700', colors.background]} locations={[0, 1]} style={styles.gradientOverlay} />
       <NoiseOverlay />
       <SafeAreaView style={styles.container}>
         <HeaderWithStepper steps={4} activeStep={1} />

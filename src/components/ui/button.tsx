@@ -1,4 +1,4 @@
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { colors } from '@/constants/colors';
 import { ComponentProps } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
@@ -9,7 +9,6 @@ export type ButtonProps = ThemeProps &
   };
 
 export const Button = (props: ButtonProps) => {
-  const textColor = useThemeColor({ light: props.lightColor, dark: props.darkColor }, 'text');
   const { children, style, variant = 'outline', ...rest } = props;
 
   return (
@@ -17,7 +16,7 @@ export const Button = (props: ButtonProps) => {
       {...rest}
       style={state => [
         styles.container,
-        { borderColor: textColor },
+        { borderColor: colors.text },
         styles[variant],
         typeof style === 'function' ? style(state) : style
       ]}
