@@ -14,10 +14,7 @@ export const NoiseOverlay = ({ opacity = 0.7 }: { opacity?: number }) => {
 const styles = StyleSheet.create({
   noiseContainer: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    inset: 0,
     zIndex: -1
   },
   noiseTexture: {

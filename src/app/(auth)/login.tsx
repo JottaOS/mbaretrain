@@ -1,11 +1,10 @@
 import { HeaderWithStepper } from '@/components/header-with-stepper';
-import { NoiseOverlay } from '@/components/noise-overlay';
+import { GradientOverlay } from '@/components/overlay/gradient-overlay';
+import { NoiseOverlay } from '@/components/overlay/noise-overlay';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { colors } from '@/constants/colors';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -23,7 +22,7 @@ export default function LoginScreen() {
   return (
     <View style={styles.wrapper}>
       <Image source={backgroundImage} style={styles.backgroundImage} contentFit='cover' />
-      <LinearGradient colors={['#37373700', colors.background]} locations={[0, 1]} style={styles.gradientOverlay} />
+      <GradientOverlay />
       <NoiseOverlay />
       <SafeAreaView style={styles.container}>
         <HeaderWithStepper steps={4} activeStep={1} />
@@ -56,12 +55,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     opacity: 0.6
-  },
-  gradientOverlay: {
-    position: 'absolute',
-    inset: 0,
-    width: '100%',
-    height: '100%'
   },
 
   contentContainer: {

@@ -1,5 +1,5 @@
 import { HeaderWithStepper } from '@/components/header-with-stepper';
-import { NoiseOverlay } from '@/components/noise-overlay';
+import { NoiseOverlay } from '@/components/overlay/noise-overlay';
 import { RadioButton } from '@/components/radio-button';
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
