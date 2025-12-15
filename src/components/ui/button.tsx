@@ -1,11 +1,12 @@
 import { colors } from '@/constants/colors';
+import { LinearGradient } from 'expo-linear-gradient';
 import { ComponentProps } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 export type ButtonProps = ThemeProps &
   ComponentProps<typeof Pressable> & {
     children: React.ReactNode;
-    variant?: 'outline' | 'ghost';
+    variant?: 'outline' | 'ghost' | 'gradient';
   };
 
 export const Button = (props: ButtonProps) => {
@@ -21,6 +22,14 @@ export const Button = (props: ButtonProps) => {
         typeof style === 'function' ? style(state) : style
       ]}
     >
+      {variant === 'gradient' && (
+        <LinearGradient
+          colors={['#373737', '#1d1d1dff', '#4C4C4C00']}
+          style={styles.linearGradient}
+          start={{ x: 1, y: 0.5 }}
+          end={{ x: 0, y: 0.5 }}
+        />
+      )}
       {children}
     </Pressable>
   );
@@ -35,7 +44,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    borderWidth: 1
+    borderWidth: 1,
+    position: 'relative',
+    overflow: 'hidden'
   },
   outline: {
     backgroundColor: 'transparent',
@@ -44,5 +55,16 @@ const styles = StyleSheet.create({
   ghost: {
     borderWidth: 0,
     color: 'white'
+  },
+  gradient: {
+    backgroundColor: 'transparent',
+    color: 'white'
+  },
+  linearGradient: {
+    position: 'absolute',
+    width: '100%',
+    top: 0,
+    right: 0,
+    bottom: 0
   }
 });
