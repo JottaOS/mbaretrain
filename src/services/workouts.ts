@@ -15,9 +15,13 @@ export const getWorkout = async (id: number): ApiResponse<Workout> => {
   }
 };
 
-export const getWorkouts = async (): ApiResponse<WorkoutList> => {
+export const getWorkouts = async ({ templatesOnly }: { templatesOnly: boolean }): ApiResponse<WorkoutList> => {
   try {
-    const response = await api.get(`/workouts`);
+    const response = await api.get(`/workouts`, {
+      params: {
+        isTemplate: templatesOnly
+      }
+    });
     return {
       success: true,
       status: response.status,
