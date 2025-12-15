@@ -1,36 +1,50 @@
-import { GradientOverlay } from '@/components/overlay/gradient-overlay';
+import { RoutineView } from '@/components/routine-view';
+import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
+import { colors } from '@/constants/colors';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.content}>
-        <GradientOverlay />
-        <Text style={styles.title}>Inicio</Text>
-        <Text style={styles.subtitle}>Bienvenido a mbaretrain</Text>
-      </SafeAreaView>
-    </View>
+    <SafeAreaView style={styles.content}>
+      <Text style={styles.greet}>
+        {'¡Hola\n'}
+        <Text style={styles.username}>Juan!</Text>
+      </Text>
+      <Button style={styles.buttonContainer} variant='gradient'>
+        <Text style={styles.buttonText}>Empezar entrenamiento</Text>
+      </Button>
+      <View style={styles.routineContainer}>
+        <RoutineView />
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   content: {
     flex: 1,
     paddingHorizontal: 32,
     paddingVertical: 48,
     gap: 16
   },
-  title: {
-    fontSize: 36,
-    fontWeight: 'bold'
+  routineContainer: {},
+  greet: {
+    fontSize: 30,
+    color: colors.disabled
   },
-  subtitle: {
-    fontSize: 18,
-    opacity: 0.8
+  username: {
+    fontSize: 48,
+    opacity: 1,
+    color: colors.text
+  },
+  buttonContainer: {
+    marginVertical: 24,
+    paddingVertical: 32,
+    borderRadius: 20,
+  },
+  buttonText: {
+    fontSize: 20
   }
 });
