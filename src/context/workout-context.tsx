@@ -1,19 +1,19 @@
-import { Exercise } from '@/types/exercise';
-import { createContext, useContext, useState } from 'react';
+import { WorkoutFormValues } from '@/libs/schemas';
+import { createContext, useContext } from 'react';
+import { useForm, UseFormReturn } from 'react-hook-form';
 
 type WorkoutContextType = {
-  selectedExercises: Exercise[];
-  setSelectedExercises: (exercises: Exercise[]) => void;
+  form: UseFormReturn<WorkoutFormValues>;
 };
 
 const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
 export const WorkoutContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
+  const form = useForm<WorkoutFormValues>({
+    mode: 'onSubmit'
+  });
 
-  return (
-    <WorkoutContext.Provider value={{ selectedExercises, setSelectedExercises }}>{children}</WorkoutContext.Provider>
-  );
+  return <WorkoutContext.Provider value={{ form }}>{children}</WorkoutContext.Provider>;
 };
 
 export const useWorkoutContext = () => {

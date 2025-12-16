@@ -4,6 +4,7 @@ import { SearchInput } from '@/components/ui/search-input';
 import { Text } from '@/components/ui/text';
 import { useWorkoutContext } from '@/context/workout-context';
 import { useExercises } from '@/hooks/use-exercises';
+import { WorkoutFormValues } from '@/libs/schemas';
 import { Exercise } from '@/types/exercise';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -15,7 +16,7 @@ export default function ExercisesScreen() {
   const [filter, setFilter] = useState<string>('');
   const { data: exercises, isLoading } = useExercises();
   const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
-  const { setSelectedExercises: saveExercisesToContext } = useWorkoutContext();
+  const { form } = useWorkoutContext();
 
   const handleExercisePress = (exercise: Exercise) => {
     const exercisesCopy = [...selectedExercises];
@@ -29,7 +30,13 @@ export default function ExercisesScreen() {
   };
 
   const handleAddExercises = () => {
-    saveExercisesToContext(selectedExercises);
+    const formExercises: WorkoutFormValues['exercises'] = selectedExercises.map(exercise => ({
+      exercise,
+      restSeconds: undefined,
+      notes: undefined,
+      details: []
+    }));
+    form.setValue('exercises', formExercises);
     router.push('/(tabs)/(training)');
   };
 

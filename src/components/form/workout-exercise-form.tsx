@@ -1,0 +1,107 @@
+import { Button } from '@/components/ui/button';
+import { Icon } from '@/components/ui/icon';
+import { Text } from '@/components/ui/text';
+import { colors } from '@/constants/colors';
+import { useWorkoutContext } from '@/context/workout-context';
+import { WorkoutFormValues } from '@/libs/schemas';
+import { getExerciseSetFields } from '@/libs/utils';
+import { SetType } from '@/types/workout';
+import { useFieldArray } from 'react-hook-form';
+import { FlatList, StyleSheet, View } from 'react-native';
+import { ExerciseSetForm } from './exercise-set-form';
+
+interface WorkoutExerciseFormProps {
+  item: WorkoutFormValues['exercises'][number];
+  index: number;
+}
+
+export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) => {
+  const { exercise } = item;
+  const { form } = useWorkoutContext();
+  const { remove } = useFieldArray({
+    control: form.control,
+    name: 'exercises'
+  });
+
+  const { append: appendDetail } = useFieldArray({
+    control: form.control,
+    name: `exercises.${index}.details`
+  });
+
+  const watchedItems = form.watch(`exercises.${index}.details`, []);
+
+  const { hasTime, hasDistance, hasReps, hasWeight } = getExerciseSetFields(item);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.exerciseName}>{exercise.name}</Text>
+        <Button variant='ghost' onPress={() => remove(index)}>
+          <Icon name='trash' size={18} color={colors.danger} />
+        </Button>
+      </View>
+      <View>
+    <View style={styles.tableHeaders}>
+        <Text>
+            Serie
+        </Text>
+        {hasTime && (
+            <Text>SERIE</Text>
+        )}
+        {hasDistance && (
+            <Text>KM</Text>
+        )}
+        {hasWeight && (
+            <Text>KG</Text>
+        )}
+        {hasReps && (
+            <Text>REPS</Text>
+        )}
+    </View>
+      <FlatList
+        data={watchedItems}
+        renderItem={({ item, index: setIndex }) => <ExerciseSetForm item={item} exerciseIndex={index} setIndex={setIndex} />}
+        keyExtractor={(_, index) => index.toString()}
+      />
+      </View>
+      <Button
+        variant='gradient'
+        onPress={() =>
+          appendDetail({
+            type: SetType.NORMAL
+          })
+        }
+        style={styles.appendDetailButton}
+      >
+        <Text>+ Agregar serie</Text>
+      </Button>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    backgroundColor: colors.backgroundSecondary,
+    borderRadius: 8
+  },
+  tableHeaders: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 56,
+    marginBottom:8 
+  },
+  exerciseName: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  appendDetailButton: {
+    marginTop: 24 
+  }
+});

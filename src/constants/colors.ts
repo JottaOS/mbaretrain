@@ -10,5 +10,6 @@ export const colors = {
   stepperActive: '#fff',
   stepperInactive: '#737373',
   tabBarInactive: '#707070',
-  disabled: '#9E9E9E'
+  disabled: '#9E9E9E',
+  danger: '#fb2c36'
 };
