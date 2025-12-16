@@ -2,6 +2,7 @@ export const colors = {
   text: '#fff',
   background: '#000',
   backgroundSecondary: '#2D2D2D',
+  backgroundTertiary: '#868686',
   inputPlaceholder: '#999999',
   tint: '#fff',
   tabIconDefault: '#ccc',

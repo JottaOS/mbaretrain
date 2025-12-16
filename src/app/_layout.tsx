@@ -1,3 +1,5 @@
+import { Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@expo-google-fonts/inter';
+import { Montserrat_100Thin, Montserrat_400Regular, Montserrat_700Bold } from '@expo-google-fonts/montserrat';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
@@ -13,8 +15,12 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    Montserrat: require('../assets/fonts/montserrat_variable.ttf'),
-    Inter: require('../assets/fonts/inter_variable.ttf'),
+    Montserrat_100Thin,
+    Montserrat_400Regular,
+    Montserrat_700Bold,
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_700Bold,
     ...FontAwesome.font
   });
 
@@ -48,6 +54,7 @@ function RootLayoutNav() {
         <Stack.Screen name='(onboarding)/step-2' options={{ headerShown: false }} />
         <Stack.Screen name='(onboarding)/step-3' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+        <Stack.Screen name='(tabs)/(training)' options={{ headerShown: false }} />
         <Stack.Screen name='+not-found' options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

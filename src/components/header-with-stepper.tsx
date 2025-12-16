@@ -1,3 +1,4 @@
+import { inter } from '@/constants/fonts';
 import { StyleSheet, View } from 'react-native';
 import { Stepper } from './stepper';
 import { Text } from './ui/text';
@@ -23,11 +24,9 @@ const styles = StyleSheet.create({
     maxWidth: '80%'
   },
   headerText: {
-    fontFamily: 'Inter',
+    fontFamily: inter.bold,
     fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: 12,
-    lineHeight: 14
+    marginRight: 12
   },
   stepperContainer: {
     flex: 1,
@@ -35,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     height: '100%',
     justifyContent: 'space-between',
-    gap: 6
+    gap: 6,
+    marginBottom: 6
   }
 });

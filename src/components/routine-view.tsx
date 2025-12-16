@@ -1,9 +1,10 @@
 import { colors } from '@/constants/colors';
 import { useState } from 'react';
-import { FlatList, StyleSheet, TextInput, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { RoutineCard } from './routine-card';
 import { Button } from './ui/button';
 import { Icon } from './ui/icon';
+import { SearchInput } from './ui/search-input';
 import { Text } from './ui/text';
 
 const routines: any[] = Array.from({ length: 5 }, () => ({}));
@@ -26,15 +27,7 @@ export const RoutineView = () => {
         </View>
       ) : (
         <>
-          <View style={styles.inputContainer}>
-            <Icon name='search' size={20} color={colors.inputPlaceholder} />
-            <TextInput
-              style={styles.input}
-              onChangeText={newText => setFilter(newText)}
-              defaultValue={filter}
-              placeholder='Buscar rutina'
-            />
-          </View>
+          <SearchInput onChangeText={setFilter} value={filter} placeholder='Buscar rutina' />
           <FlatList
             data={routines}
             renderItem={({ item }) => <RoutineCard routine={item} />}

@@ -6,7 +6,7 @@ import { Pressable, StyleSheet } from 'react-native';
 export type ButtonProps = ThemeProps &
   ComponentProps<typeof Pressable> & {
     children: React.ReactNode;
-    variant?: 'outline' | 'ghost' | 'gradient';
+    variant?: 'outline' | 'ghost' | 'gradient' | 'solid';
   };
 
 export const Button = (props: ButtonProps) => {
@@ -58,6 +58,11 @@ const styles = StyleSheet.create({
   },
   gradient: {
     backgroundColor: 'transparent',
+    color: 'white'
+  },
+  solid: {
+    backgroundColor: colors.backgroundTertiary,
+    borderWidth: 0,
     color: 'white'
   },
   linearGradient: {
