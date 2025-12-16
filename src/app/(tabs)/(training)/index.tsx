@@ -44,44 +44,44 @@ export default function TrainingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 32,
-    paddingVertical: 48,
+    paddingHorizontal: 20,
+    paddingVertical: 48
   },
   header: {
-    marginBottom: 32,
+    marginBottom: 32
   },
   title: {
     fontSize: 36,
     fontWeight: 'bold',
     color: colors.text,
-    marginBottom: 8,
+    marginBottom: 8
   },
   subtitle: {
     fontSize: 18,
-    color: colors.disabled,
+    color: colors.disabled
   },
   content: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   infoText: {
     fontSize: 16,
     color: colors.text,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   footer: {
     marginTop: 24,
-    gap: 16,
+    gap: 16
   },
   button: {
     paddingVertical: 16,
-    borderRadius: 20,
+    borderRadius: 20
   },
   secondaryButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   buttonText: {
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });

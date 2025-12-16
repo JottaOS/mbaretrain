@@ -28,7 +28,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   content: {
     flex: 1,
-    paddingHorizontal: 32,
+    paddingHorizontal: 20,
     paddingVertical: 48,
     gap: 16
   },
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginVertical: 24,
     paddingVertical: 32,
-    borderRadius: 20,
+    borderRadius: 20
   },
   buttonText: {
     fontSize: 20

@@ -65,11 +65,11 @@ export default function ExercisesScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 32,
-    paddingBottom: 48,
+    paddingHorizontal: 20,
+    paddingBottom: 48
   },
   content: {
-    position: 'relative',
+    position: 'relative'
   },
   title: {
     fontSize: 16,
@@ -84,6 +84,6 @@ const styles = StyleSheet.create({
     bottom: 64,
     left: 0,
     right: 0,
-    padding: 32,
+    padding: 32
   }
 });
