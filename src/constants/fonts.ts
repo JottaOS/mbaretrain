@@ -1,11 +1,11 @@
 export const montserrat = {
-    regular: 'Montserrat_400Regular',
-    bold: 'Montserrat_700Bold',
-    thin: 'Montserrat_100Thin'
-}
+  thin: 'Montserrat_100Thin',
+  regular: 'Montserrat_400Regular',
+  bold: 'Montserrat_700Bold'
+};
 
 export const inter = {
-    regular: 'Inter_400Regular',
-    medium: 'Inter_500Medium',
-    bold: 'Inter_700Bold'
-}
+  regular: 'Inter_400Regular',
+  medium: 'Inter_500Medium',
+  bold: 'Inter_700Bold'
+};

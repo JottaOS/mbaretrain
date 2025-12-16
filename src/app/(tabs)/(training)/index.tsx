@@ -1,40 +1,37 @@
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { colors } from '@/constants/colors';
+import { useElapsedTime } from '@/hooks/use-elapsed-time';
 import { useRouter } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+const startedAt = new Date();
+
 export default function TrainingScreen() {
   const router = useRouter();
+  const { elapsedTime } = useElapsedTime({ startedAt });
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Entrenamiento</Text>
-        <Text style={styles.subtitle}>¡Vamos a entrenar!</Text>
-      </View>
-
-      <View style={styles.content}>
-        <Text style={styles.infoText}>
-          Selecciona una opción para comenzar
-        </Text>
+        <View>
+          <Text style={styles.headerItemLabel}>Duración</Text>
+          <Text style={styles.headerItemValue}>{elapsedTime}s</Text>
+        </View>
+        <View>
+          <Text style={styles.headerItemLabel}>Volumen</Text>
+          <Text style={styles.headerItemValue}>0 kg</Text>
+        </View>
+        <View>
+          <Text style={styles.headerItemLabel}>Series</Text>
+          <Text style={styles.headerItemValue}>0</Text>
+        </View>
       </View>
 
       <View style={styles.footer}>
-        <Button 
-          style={styles.button} 
-          variant='gradient'
-          onPress={() => router.push('/(tabs)/(training)/exercises')}
-        >
-          <Text style={styles.buttonText}>Ver Ejercicios</Text>
-        </Button>
-        
-        <Button 
-          style={[styles.button, styles.secondaryButton]} 
-          onPress={() => router.back()}
-        >
-          <Text style={styles.buttonText}>Volver</Text>
+        <Button style={styles.button} variant='gradient' onPress={() => router.push('/(tabs)/(training)/exercises')}>
+          <Text style={styles.buttonText}>+ Agregar ejercicio</Text>
         </Button>
       </View>
     </SafeAreaView>
@@ -45,30 +42,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 48
+    paddingVertical: 24
   },
   header: {
-    marginBottom: 32
+    marginBottom: 32,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
-  title: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: colors.text,
-    marginBottom: 8
+  headerItemLabel: {
+    fontSize: 12,
+    color: colors.inputPlaceholder
   },
-  subtitle: {
-    fontSize: 18,
-    color: colors.disabled
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  infoText: {
+  headerItemValue: {
     fontSize: 16,
-    color: colors.text,
-    textAlign: 'center'
+    lineHeight: 24
   },
   footer: {
     marginTop: 24,
@@ -77,9 +64,6 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 16,
     borderRadius: 20
-  },
-  secondaryButton: {
-    backgroundColor: 'transparent'
   },
   buttonText: {
     fontSize: 18

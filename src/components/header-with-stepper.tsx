@@ -1,4 +1,3 @@
-import { inter } from '@/constants/fonts';
 import { StyleSheet, View } from 'react-native';
 import { Stepper } from './stepper';
 import { Text } from './ui/text';
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     maxWidth: '80%'
   },
   headerText: {
-    fontFamily: inter.bold,
+    fontWeight: 'bold',
     fontSize: 20,
     marginRight: 12
   },
