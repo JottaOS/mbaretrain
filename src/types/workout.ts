@@ -34,3 +34,27 @@ export enum SetType {
 }
 
 export type WorkoutList = ListResponse<Workout>;
+
+// Request types based on Java DTOs
+export type WorkoutRequest = {
+  title: string;
+  startedAt?: string;
+  finishedAt?: string;
+  isTemplate: boolean;
+  exercises: WorkoutExerciseRequest[];
+};
+
+export type WorkoutExerciseRequest = {
+  exerciseId: number;
+  restSeconds?: number;
+  notes?: string;
+  details: WorkoutExerciseDetailRequest[];
+};
+
+export type WorkoutExerciseDetailRequest = {
+  type: SetType;
+  reps?: number;
+  weight?: number;
+  distanceMeters?: number;
+  durationSeconds?: number;
+};
