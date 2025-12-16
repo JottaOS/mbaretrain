@@ -35,7 +35,6 @@ export enum SetType {
 
 export type WorkoutList = ListResponse<Workout>;
 
-// Request types based on Java DTOs
 export type WorkoutRequest = {
   title: string;
   startedAt?: string;

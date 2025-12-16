@@ -1,9 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { colors } from '@/constants/colors';
+import { useWorkoutContext } from '@/context/workout-context';
 import { useElapsedTime } from '@/hooks/use-elapsed-time';
+import { WorkoutFormValues } from '@/libs/schemas';
 import { useRouter } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const startedAt = new Date();
@@ -12,6 +15,22 @@ export default function TrainingScreen() {
   const router = useRouter();
   const { elapsedTime } = useElapsedTime({ startedAt });
 
+  const { selectedExercises } = useWorkoutContext();
+
+  const form = useForm<WorkoutFormValues>({
+    mode: 'onSubmit'
+  });
+
+  const { append: appendExercise, remove: removeExercise } = useFieldArray({
+    control: form.control,
+    name: 'exercises'
+  });
+
+  const onSubmit = (data: WorkoutFormValues) => {
+    console.log(data);
+  };
+
+  const watchedExercises = form.watch('exercises');
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -29,6 +48,9 @@ export default function TrainingScreen() {
         </View>
       </View>
 
+      <FormProvider {...form}>
+        <FlatList data={selectedExercises} renderItem={({ item }) => <Text>{item.name}</Text>} />
+      </FormProvider>
       <View style={styles.footer}>
         <Button style={styles.button} variant='gradient' onPress={() => router.push('/(tabs)/(training)/exercises')}>
           <Text style={styles.buttonText}>+ Agregar ejercicio</Text>

@@ -2,6 +2,7 @@ import { ExerciseCard } from '@/components/exercise-card';
 import { Button } from '@/components/ui/button';
 import { SearchInput } from '@/components/ui/search-input';
 import { Text } from '@/components/ui/text';
+import { useWorkoutContext } from '@/context/workout-context';
 import { useExercises } from '@/hooks/use-exercises';
 import { Exercise } from '@/types/exercise';
 import { useRouter } from 'expo-router';
@@ -13,18 +14,23 @@ export default function ExercisesScreen() {
   const router = useRouter();
   const [filter, setFilter] = useState<string>('');
   const { data: exercises, isLoading } = useExercises();
-  const [selectedExercises, setSelectedExercises] = useState<Set<number>>(new Set());
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
+  const { setSelectedExercises: saveExercisesToContext } = useWorkoutContext();
 
   const handleExercisePress = (exercise: Exercise) => {
-    const newExerciseSet = new Set(selectedExercises);
-
-    if(newExerciseSet.has(exercise.id)) {
-      newExerciseSet.delete(exercise.id);
+    const exercisesCopy = [...selectedExercises];
+    const index = exercisesCopy.findIndex(ex => ex.id === exercise.id);
+    if (index > -1) {
+      exercisesCopy.splice(index, 1);
     } else {
-      newExerciseSet.add(exercise.id);
+      exercisesCopy.push(exercise);
     }
+    setSelectedExercises(exercisesCopy);
+  };
 
-    setSelectedExercises(newExerciseSet);
+  const handleAddExercises = () => {
+    saveExercisesToContext(selectedExercises);
+    router.push('/(tabs)/(training)');
   };
 
   const filteredExercises = exercises.filter(exercise => exercise.name.toLowerCase().includes(filter.toLowerCase()));
@@ -40,22 +46,18 @@ export default function ExercisesScreen() {
           <FlatList
             data={filteredExercises}
             renderItem={({ item }) => {
-              const isSelected = selectedExercises.has(item.id);
+              const isSelected = selectedExercises.findIndex(ex => ex.id === item.id) > -1;
 
-              return (
-                <ExerciseCard
-                  exercise={item}
-                  isSelected={isSelected}
-                  onPress={handleExercisePress}
-                />
-              )
+              return <ExerciseCard exercise={item} isSelected={isSelected} onPress={handleExercisePress} />;
             }}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.cardListContainer}
           />
         )}
-        {selectedExercises.size > 0 && (
-          <Button onPress={() => {}} style={styles.buttonContainer} variant='solid'><Text>Agregar {selectedExercises.size} ejercicios</Text></Button>
+        {selectedExercises.length > 0 && (
+          <Button onPress={() => handleAddExercises()} style={styles.buttonContainer} variant='solid'>
+            <Text>Agregar {selectedExercises.length} ejercicios</Text>
+          </Button>
         )}
       </View>
     </SafeAreaView>
