@@ -37,7 +37,7 @@ export default function ExercisesScreen() {
       details: []
     }));
     form.setValue('exercises', formExercises);
-    router.push('/(training)');
+    router.replace('/(training)');
   };
 
   const filteredExercises = exercises.filter(exercise => exercise.name.toLowerCase().includes(filter.toLowerCase()));

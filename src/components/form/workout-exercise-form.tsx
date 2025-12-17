@@ -88,7 +88,8 @@ export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) =
         variant='gradient'
         onPress={() =>
           appendDetail({
-            type: SetType.NORMAL
+            type: SetType.NORMAL,
+            isCompleted: false
           })
         }
         style={styles.appendDetailButton}
