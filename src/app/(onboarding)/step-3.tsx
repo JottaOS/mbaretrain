@@ -29,7 +29,7 @@ export default function OnboardingThree() {
           <Button style={styles.button} onPress={handleFinish}>
             <Text>Comenzar</Text>
           </Button>
-          <Button style={styles.secondaryButton} onPress={() => router.back()}>
+          <Button style={styles.secondaryButton} onPress={() => router.back()} variant='ghost'>
             <Text>Atrás</Text>
           </Button>
         </View>

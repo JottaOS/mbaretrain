@@ -6,6 +6,7 @@ import { Text } from '@/components/ui/text';
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,9 +14,13 @@ const backgroundImage = require('@/assets/images/login-bg.webp');
 
 export default function LoginScreen() {
   const router = useRouter();
+  const [isLoggingIn, setIsLoggingIn] = useState<boolean>(false);
 
-  const handleLogin = (provider: 'GOOGLE' | 'FACEBOOK') => {
+  const handleLogin = async (provider: 'GOOGLE' | 'FACEBOOK') => {
     console.log(provider);
+    setIsLoggingIn(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setIsLoggingIn(false);
     router.push('/(onboarding)/step-1');
   };
 
@@ -29,7 +34,7 @@ export default function LoginScreen() {
         <View style={styles.contentContainer}>
           <Text style={styles.welcomeText}>¡Bienvenido a mbaretrain!</Text>
           <Text style={styles.subtitleText}>Inicia sesión o registrate para comenzar.</Text>
-          <Button style={styles.button} onPress={() => handleLogin('GOOGLE')}>
+          <Button style={styles.button} onPress={() => handleLogin('GOOGLE')} loading={isLoggingIn}>
             <Ionicons name='logo-google' size={24} color='white' />
             <Text>Continuar con Google</Text>
           </Button>

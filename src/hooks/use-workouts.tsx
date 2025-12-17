@@ -15,6 +15,7 @@ export const useWorkouts = ({ templatesOnly = false }: UseWorkoutsProps) => {
   useEffect(() => {
     (async () => {
       setIsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const response = await getWorkouts({ templatesOnly });
       if (!response.success) {
         handleError(response);

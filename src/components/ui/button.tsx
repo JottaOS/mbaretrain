@@ -1,15 +1,16 @@
 import { colors } from '@/constants/colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ComponentProps, useRef } from 'react';
-import { Animated, Pressable, StyleSheet } from 'react-native';
+import { ActivityIndicator, Animated, Pressable, StyleSheet } from 'react-native';
 
 export type ButtonProps = ComponentProps<typeof Pressable> & {
   children: React.ReactNode;
   variant?: 'outline' | 'ghost' | 'gradient' | 'solid';
+  loading?: boolean;
 };
 
 export const Button = (props: ButtonProps) => {
-  const { children, style, variant = 'outline', ...rest } = props;
+  const { children, style, variant = 'outline', loading, ...rest } = props;
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
@@ -30,7 +31,7 @@ export const Button = (props: ButtonProps) => {
   };
 
   return (
-    <Pressable {...rest} onPressIn={handlePressIn} onPressOut={handlePressOut}>
+    <Pressable {...rest} onPressIn={handlePressIn} onPressOut={handlePressOut} disabled={loading}>
       {({ pressed }) => (
         <Animated.View
           style={[
@@ -50,7 +51,7 @@ export const Button = (props: ButtonProps) => {
               end={{ x: 0, y: 0.5 }}
             />
           )}
-          {children}
+          {loading ? <ActivityIndicator /> : children}
         </Animated.View>
       )}
     </Pressable>

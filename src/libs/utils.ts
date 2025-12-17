@@ -1,4 +1,5 @@
 import { ExerciseType } from '@/types/exercise';
+import { Workout } from '@/types/workout';
 import * as SecureStore from 'expo-secure-store';
 import { WorkoutFormValues } from './schemas';
 
@@ -35,4 +36,31 @@ export const formatTime = (seconds?: number) => {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+};
+
+export const getStatsFormWorkout = (workout: Workout) => {
+  const { exercises } = workout;
+
+  const sets = exercises.reduce((acc, exercise) => acc + exercise.details.length, 0);
+  const reps = exercises.reduce(
+    (acc, exercise) => acc + exercise.details.reduce((acc, detail) => acc + detail.reps, 0),
+    0
+  );
+
+  const time = exercises.reduce(
+    (acc, exercise) => acc + exercise.details.reduce((acc, detail) => acc + detail.durationSeconds, 0),
+    0
+  );
+
+  const volume = exercises.reduce(
+    (acc, exercise) => acc + exercise.details.reduce((acc, detail) => acc + detail.weight * detail.reps, 0),
+    0
+  );
+
+  return {
+    sets,
+    reps,
+    time,
+    volume
+  };
 };

@@ -1,26 +1,33 @@
 import { colors } from '@/constants/colors';
+import { useWorkouts } from '@/hooks/use-workouts';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { RoutineCard } from './routine-card';
 import { Button } from './ui/button';
 import { Icon } from './ui/icon';
 import { SearchInput } from './ui/search-input';
 import { Text } from './ui/text';
 
-const routines: any[] = Array.from({ length: 5 }, () => ({}));
-
 export const RoutineView = () => {
+  const router = useRouter();
+  const { data: routines, isLoading } = useWorkouts({ templatesOnly: true });
   const [filter, setFilter] = useState<string>('');
+
+  const filteredRoutines = routines?.filter(routine => routine.title.toLowerCase().includes(filter.toLowerCase()));
+  const isEmpty = routines?.length === 0;
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mis rutinas</Text>
 
-      {routines.length === 0 ? (
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : isEmpty ? (
         <View style={styles.emptyStateContainer}>
           <Icon name='apps' size={52} color={colors.tabBarInactive} />
           <Text style={styles.emptyStateText}>¡Aún no tienes rutinas creadas!</Text>
-          <Button style={styles.emptyStateButton} variant='gradient'>
+          <Button style={styles.emptyStateButton} variant='outline' onPress={() => router.push('/(training)')}>
             <Icon name='plus' size={16} color={colors.text} />
             <Text style={styles.emptyStateButtonText}>Crear rutina</Text>
           </Button>
@@ -29,7 +36,7 @@ export const RoutineView = () => {
         <>
           <SearchInput onChangeText={setFilter} value={filter} placeholder='Buscar rutina' />
           <FlatList
-            data={routines}
+            data={filteredRoutines}
             renderItem={({ item }) => <RoutineCard routine={item} />}
             keyExtractor={(_: any, index: number) => index.toString()}
             contentContainerStyle={styles.cardListContainer}

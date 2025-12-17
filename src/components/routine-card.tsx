@@ -1,4 +1,5 @@
 import { colors } from '@/constants/colors';
+import { getStatsFormWorkout } from '@/libs/utils';
 import { Workout } from '@/types/workout';
 import { StyleSheet, View } from 'react-native';
 import { Button } from './ui/button';
@@ -6,18 +7,20 @@ import { Icon } from './ui/icon';
 import { Text } from './ui/text';
 
 interface RoutineCardProps {
-  routine: Workout | any;
+  routine: Workout;
 }
 
 export const RoutineCard = ({ routine }: RoutineCardProps) => {
+  const stats = getStatsFormWorkout(routine);
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
-        <Text style={styles.cardTitle}>Rutina Tricep sin mancuernas</Text>
+        <Text style={styles.cardTitle}>{routine.title}</Text>
         <View style={styles.routineStat}>
-          <Text style={styles.statText}>3 sets</Text>
-          <Text style={styles.statText}>12 reps</Text>
-          <Text style={styles.statText}>15 minutos</Text>
+          <Text style={styles.statText}>{stats.sets} sets</Text>
+          <Text style={styles.statText}>{stats.reps} reps</Text>
+          <Text style={styles.statText}>{stats.time} minutos</Text>
         </View>
       </View>
       <Button variant='ghost' onPress={() => {}}>
