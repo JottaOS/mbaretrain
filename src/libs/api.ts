@@ -1,9 +1,9 @@
 import { ApiError, ErrorType } from '@/types/api';
 import axios from 'axios';
-import { getFromStore } from './utils';
 
 const baseURL = process.env.EXPO_PUBLIC_API_URL;
 
+console.log(baseURL);
 export const api = axios.create({
   baseURL,
   headers: {
@@ -12,10 +12,10 @@ export const api = axios.create({
 });
 
 api.interceptors.request.use(config => {
-  const token = getFromStore('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  // const token = getFromStore('token');
+  // if (token) {
+  //   config.headers.Authorization = `Bearer ${token}`;
+  // }
 
   console.log('[Request]', {
     method: config.method,
@@ -37,6 +37,7 @@ api.interceptors.response.use(response => {
 });
 
 export const handleError = (error: any): ApiError => {
+  console.error(error);
   if (axios.isAxiosError(error) && error.response) {
     return {
       success: false,

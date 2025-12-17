@@ -32,7 +32,8 @@ export default function TrainingLayout() {
           name='exercises'
           options={{
             headerShown: true,
-            title: 'Agregar Ejercicio'
+            title: 'Agregar Ejercicio',
+            headerBackButtonDisplayMode: 'minimal'
           }}
         />
       </Stack>

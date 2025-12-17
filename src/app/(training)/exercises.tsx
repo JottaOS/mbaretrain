@@ -8,7 +8,7 @@ import { WorkoutFormValues } from '@/libs/schemas';
 import { Exercise } from '@/types/exercise';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function ExercisesScreen() {
@@ -48,7 +48,7 @@ export default function ExercisesScreen() {
       <View style={styles.content}>
         <Text style={styles.title}>Ejercicios</Text>
         {isLoading ? (
-          <Text>Cargando...</Text>
+          <ActivityIndicator />
         ) : (
           <FlatList
             data={filteredExercises}
@@ -63,7 +63,9 @@ export default function ExercisesScreen() {
         )}
         {selectedExercises.length > 0 && (
           <Button onPress={() => handleAddExercises()} style={styles.buttonContainer} variant='solid'>
-            <Text>Agregar {selectedExercises.length} ejercicios</Text>
+            <Text>
+              Agregar {selectedExercises.length} ejercicio{selectedExercises.length > 1 ? 's' : ''}
+            </Text>
           </Button>
         )}
       </View>
