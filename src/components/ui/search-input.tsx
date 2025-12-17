@@ -3,9 +3,9 @@ import { colors } from '@/constants/colors';
 import { TextInput as BaseTextInput, StyleSheet, View } from 'react-native';
 
 interface SearchInputProps {
-    onChangeText: (value: string) => void;
-    value: string;
-    placeholder?: string
+  onChangeText: (value: string) => void;
+  value: string;
+  placeholder?: string;
 }
 
 export const SearchInput = ({ onChangeText, value, placeholder }: SearchInputProps) => {

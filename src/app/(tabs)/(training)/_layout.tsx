@@ -47,10 +47,10 @@ export default function TrainingLayout() {
 const styles = StyleSheet.create({
   cancelButton: {
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 8
   },
   cancelText: {
     color: colors.text,
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 });

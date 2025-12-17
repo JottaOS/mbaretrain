@@ -7,7 +7,6 @@ interface HandledError {
   message: string;
 }
 
-
 // TODO: Agregar snackbar o algún método de notificación
 export const useErrorHandler = () => {
   //   const { showSnackbar } = useSnackbar();

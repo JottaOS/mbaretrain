@@ -20,21 +20,13 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
 
   return (
     <View>
-        <View style={styles.row}>
-            <Text style={styles.setNumber}>{setIndex + 1}</Text>
-            {hasTime && (
-               <Text>{item.durationSeconds}s</Text>
-            )}
-            {hasDistance && (
-                <Text>{item.distanceMeters ? item.distanceMeters / 1000 : 0}</Text>
-            )}
-            {hasReps && (
-                <Text>{item.reps}</Text>
-            )}
-            {hasWeight && (
-                <Text>{item.weight}</Text>
-            )}
-        </View>
+      <View style={styles.row}>
+        <Text style={styles.setNumber}>{setIndex + 1}</Text>
+        {hasTime && <Text>{item.durationSeconds}s</Text>}
+        {hasDistance && <Text>{item.distanceMeters ? item.distanceMeters / 1000 : 0}</Text>}
+        {hasReps && <Text>{item.reps}</Text>}
+        {hasWeight && <Text>{item.weight}</Text>}
+      </View>
     </View>
   );
 };

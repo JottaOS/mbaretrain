@@ -41,28 +41,20 @@ export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) =
         </Button>
       </View>
       <View>
-    <View style={styles.tableHeaders}>
-        <Text>
-            Serie
-        </Text>
-        {hasTime && (
-            <Text>SERIE</Text>
-        )}
-        {hasDistance && (
-            <Text>KM</Text>
-        )}
-        {hasWeight && (
-            <Text>KG</Text>
-        )}
-        {hasReps && (
-            <Text>REPS</Text>
-        )}
-    </View>
-      <FlatList
-        data={watchedItems}
-        renderItem={({ item, index: setIndex }) => <ExerciseSetForm item={item} exerciseIndex={index} setIndex={setIndex} />}
-        keyExtractor={(_, index) => index.toString()}
-      />
+        <View style={styles.tableHeaders}>
+          <Text>Serie</Text>
+          {hasTime && <Text>SERIE</Text>}
+          {hasDistance && <Text>KM</Text>}
+          {hasWeight && <Text>KG</Text>}
+          {hasReps && <Text>REPS</Text>}
+        </View>
+        <FlatList
+          data={watchedItems}
+          renderItem={({ item, index: setIndex }) => (
+            <ExerciseSetForm item={item} exerciseIndex={index} setIndex={setIndex} />
+          )}
+          keyExtractor={(_, index) => index.toString()}
+        />
       </View>
       <Button
         variant='gradient'
@@ -90,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: 56,
-    marginBottom:8 
+    marginBottom: 8
   },
   exerciseName: {
     fontSize: 16,
@@ -102,6 +94,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   appendDetailButton: {
-    marginTop: 24 
+    marginTop: 24
   }
 });
