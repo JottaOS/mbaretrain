@@ -88,6 +88,7 @@ const workoutExerciseSchema = z
   });
 
 export const workoutSchema = z.object({
+  startedAt: z.date(),
   isTemplate: z.boolean().default(false),
   exercises: z.array(workoutExerciseSchema)
 });

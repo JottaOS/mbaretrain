@@ -1,11 +1,9 @@
 import { colors } from '@/constants/colors';
 import { WorkoutContextProvider } from '@/context/workout-context';
-import { Stack, useRouter } from 'expo-router';
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Stack } from 'expo-router';
+import { StyleSheet } from 'react-native';
 
 export default function TrainingLayout() {
-  const router = useRouter();
-
   return (
     <WorkoutContextProvider>
       <Stack
@@ -17,26 +15,23 @@ export default function TrainingLayout() {
           headerTitleStyle: {
             fontSize: 18
           },
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <Pressable onPress={() => router.back()} style={styles.cancelButton}>
-              <Text style={styles.cancelText}>Cancelar</Text>
-            </Pressable>
-          )
+          headerTitleAlign: 'center'
         }}
       >
         <Stack.Screen
           name='index'
           options={{
             headerShown: true,
-            title: 'Entrenamiento'
+            title: 'Entrenamiento',
+            headerBackVisible: false
           }}
         />
         <Stack.Screen
           name='exercises'
           options={{
             headerShown: true,
-            title: 'Agregar Ejercicio'
+            title: 'Agregar Ejercicio',
+            headerBackButtonDisplayMode: 'minimal'
           }}
         />
       </Stack>

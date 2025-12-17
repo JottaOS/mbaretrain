@@ -6,7 +6,7 @@ import { useWorkoutContext } from '@/context/workout-context';
 import { WorkoutFormValues } from '@/libs/schemas';
 import { getExerciseSetFields } from '@/libs/utils';
 import { SetType } from '@/types/workout';
-import { useFieldArray } from 'react-hook-form';
+import { Controller, useFieldArray } from 'react-hook-form';
 import { FlatList, StyleSheet, View } from 'react-native';
 import { Input } from '../ui/input';
 import { ExerciseSetForm } from './exercise-set-form';
@@ -41,11 +41,17 @@ export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) =
           <Icon name='trash' size={18} color={colors.danger} />
         </Button>
       </View>
-      <Input
-        placeholder='Agrega notas aquí...'
-        onChangeText={value => form.setValue(`exercises.${index}.notes`, value)}
-        value={item.notes}
-        style={styles.notesInput}
+      <Controller
+        control={form.control}
+        name={`exercises.${index}.notes`}
+        render={({ field }) => (
+          <Input
+            placeholder='Agrega notas aquí...'
+            onChangeText={field.onChange}
+            value={field.value}
+            style={styles.notesInput}
+          />
+        )}
       />
       <View>
         <View style={styles.tableHeaders}>
@@ -88,7 +94,8 @@ export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) =
         variant='gradient'
         onPress={() =>
           appendDetail({
-            type: SetType.NORMAL
+            type: SetType.NORMAL,
+            isCompleted: false
           })
         }
         style={styles.appendDetailButton}

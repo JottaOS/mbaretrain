@@ -15,8 +15,11 @@ export default function ExercisesScreen() {
   const router = useRouter();
   const [filter, setFilter] = useState<string>('');
   const { data: exercises, isLoading } = useExercises();
-  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const { form } = useWorkoutContext();
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>(
+    // @ts-ignore
+    form.getValues('exercises')?.map(ex => ex.exercise) || []
+  );
 
   const handleExercisePress = (exercise: Exercise) => {
     const exercisesCopy = [...selectedExercises];
@@ -30,13 +33,21 @@ export default function ExercisesScreen() {
   };
 
   const handleAddExercises = () => {
-    const formExercises: WorkoutFormValues['exercises'] = selectedExercises.map(exercise => ({
-      exercise,
-      restSeconds: undefined,
-      notes: undefined,
-      details: []
-    }));
-    form.setValue('exercises', formExercises);
+    const currentlySelectedExercises = form.getValues('exercises') || [];
+    const currentIds = currentlySelectedExercises.map(ex => ex.exercise.id);
+
+    const newExercises: WorkoutFormValues['exercises'] = selectedExercises
+      .filter(exercise => !currentIds.includes(exercise.id))
+      .map(exercise => ({
+        exercise,
+        restSeconds: undefined,
+        notes: undefined,
+        details: []
+      }));
+
+    const finalExercises = [...currentlySelectedExercises, ...newExercises];
+    console.log('[FINAL EXERCISES]', JSON.stringify(finalExercises, null, 2));
+    form.setValue('exercises', finalExercises);
     router.push('/(training)');
   };
 

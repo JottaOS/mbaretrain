@@ -10,6 +10,7 @@ const WorkoutContext = createContext<WorkoutContextType | undefined>(undefined);
 
 export const WorkoutContextProvider = ({ children }: { children: React.ReactNode }) => {
   const form = useForm<WorkoutFormValues>({
+    defaultValues: { startedAt: new Date() },
     mode: 'onSubmit'
   });
 
