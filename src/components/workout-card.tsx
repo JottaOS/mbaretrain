@@ -6,26 +6,30 @@ import { Button } from './ui/button';
 import { Icon } from './ui/icon';
 import { Text } from './ui/text';
 
-interface RoutineCardProps {
-  routine: Workout;
+interface WorkoutCardProps {
+  workout: Workout;
+  displayIcon?: boolean;
 }
 
-export const RoutineCard = ({ routine }: RoutineCardProps) => {
-  const stats = getStatsFormWorkout(routine);
+export const WorkoutCard = ({ workout, displayIcon = true }: WorkoutCardProps) => {
+  const stats = getStatsFormWorkout(workout);
 
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardContent}>
-        <Text style={styles.cardTitle}>{routine.title}</Text>
+        <Text style={styles.cardTitle}>{workout.title}</Text>
         <View style={styles.routineStat}>
           <Text style={styles.statText}>{stats.sets} sets</Text>
           <Text style={styles.statText}>{stats.reps} reps</Text>
+          <Text style={styles.statText}>{stats.volume} kg</Text>
           <Text style={styles.statText}>{stats.time} minutos</Text>
         </View>
       </View>
-      <Button variant='ghost' onPress={() => {}}>
-        <Icon name='play' size={28} color={colors.inputPlaceholder} />
-      </Button>
+      {displayIcon && (
+        <Button variant='ghost' onPress={() => {}}>
+          <Icon name='play' size={28} color={colors.inputPlaceholder} />
+        </Button>
+      )}
     </View>
   );
 };

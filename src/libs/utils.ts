@@ -75,7 +75,7 @@ export const formatWorkoutRequest = (workout: WorkoutFormValues): WorkoutRequest
     volume: stats.volume,
     startedAt: workout.startedAt.toISOString(),
     finishedAt: new Date().toISOString(),
-    isTemplate: workout.isTemplate,
+    isTemplate: workout.isTemplate ?? false,
     exercises: workout.exercises.map(exercise => ({
       exerciseId: exercise.exercise.id,
       restSeconds: exercise.restSeconds,

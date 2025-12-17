@@ -3,11 +3,11 @@ import { useWorkouts } from '@/hooks/use-workouts';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
-import { RoutineCard } from './routine-card';
 import { Button } from './ui/button';
 import { Icon } from './ui/icon';
 import { SearchInput } from './ui/search-input';
 import { Text } from './ui/text';
+import { WorkoutCard } from './workout-card';
 
 export const RoutineView = () => {
   const router = useRouter();
@@ -37,7 +37,7 @@ export const RoutineView = () => {
           <SearchInput onChangeText={setFilter} value={filter} placeholder='Buscar rutina' />
           <FlatList
             data={filteredRoutines}
-            renderItem={({ item }) => <RoutineCard routine={item} />}
+            renderItem={({ item }) => <WorkoutCard workout={item} />}
             keyExtractor={(_: any, index: number) => index.toString()}
             contentContainerStyle={styles.cardListContainer}
           />

@@ -1,7 +1,8 @@
+import { Icon } from '@/components/ui/icon';
 import { colors } from '@/constants/colors';
 import { WorkoutContextProvider } from '@/context/workout-context';
-import { Stack } from 'expo-router';
-import { StyleSheet } from 'react-native';
+import { router, Stack } from 'expo-router';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function TrainingLayout() {
   return (
@@ -24,7 +25,11 @@ export default function TrainingLayout() {
           options={{
             headerShown: true,
             title: 'Entrenamiento',
-            headerBackVisible: true
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => router.back()}>
+                <Icon name='chevron-left' size={24} color={colors.text} />
+              </TouchableOpacity>
+            )
           }}
         />
         <Stack.Screen
