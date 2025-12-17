@@ -7,18 +7,24 @@ import { useWorkoutContext } from '@/context/workout-context';
 import { useElapsedTime } from '@/hooks/use-elapsed-time';
 import { WorkoutFormValues } from '@/libs/schemas';
 import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 import { FlatList, KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const startedAt = new Date();
-
 export default function TrainingScreen() {
   const router = useRouter();
-  const { elapsedTime } = useElapsedTime({ startedAt });
   const { form } = useWorkoutContext();
+  const { elapsedTime } = useElapsedTime({ startedAt: form.getValues('startedAt') || new Date() });
+
+  useEffect(() => {
+    if (!form.getValues('startedAt')) {
+      form.setValue('startedAt', new Date());
+    }
+  }, []);
 
   const onSubmit = (data: WorkoutFormValues) => {
     console.log('[successfull submit]', data);
+    router.push('/(training)/save');
   };
 
   const handleDiscard = () => {

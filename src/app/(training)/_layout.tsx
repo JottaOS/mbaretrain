@@ -1,11 +1,9 @@
 import { colors } from '@/constants/colors';
 import { WorkoutContextProvider } from '@/context/workout-context';
-import { Stack, useRouter } from 'expo-router';
+import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 export default function TrainingLayout() {
-  const router = useRouter();
-
   return (
     <WorkoutContextProvider>
       <Stack
@@ -17,7 +15,8 @@ export default function TrainingLayout() {
           headerTitleStyle: {
             fontSize: 18
           },
-          headerTitleAlign: 'center'
+          headerTitleAlign: 'center',
+          headerBackButtonDisplayMode: 'minimal'
         }}
       >
         <Stack.Screen
@@ -25,15 +24,22 @@ export default function TrainingLayout() {
           options={{
             headerShown: true,
             title: 'Entrenamiento',
-            headerBackVisible: false
+            headerBackVisible: true
           }}
         />
         <Stack.Screen
           name='exercises'
           options={{
             headerShown: true,
-            title: 'Agregar Ejercicio',
-            headerBackButtonDisplayMode: 'minimal'
+            title: 'Agregar Ejercicio'
+          }}
+        />
+        <Stack.Screen
+          name='save'
+          options={{
+            headerShown: true,
+            title: 'Guardar',
+            headerBackVisible: false
           }}
         />
       </Stack>

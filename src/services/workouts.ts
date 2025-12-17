@@ -1,6 +1,6 @@
 import { api, handleError } from '@/libs/api';
 import { ApiResponse } from '@/types/api';
-import { Workout, WorkoutList } from '@/types/workout';
+import { Workout, WorkoutList, WorkoutRequest } from '@/types/workout';
 
 export const getWorkout = async (id: number): ApiResponse<Workout> => {
   try {
@@ -32,7 +32,7 @@ export const getWorkouts = async ({ templatesOnly }: { templatesOnly: boolean })
   }
 };
 
-export const createWorkout = async (workout: Workout): ApiResponse<Workout> => {
+export const createWorkout = async (workout: WorkoutRequest): ApiResponse<Workout> => {
   try {
     const response = await api.post(`/workouts`, workout);
     return {

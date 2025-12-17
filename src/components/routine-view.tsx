@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   emptyStateButton: {
-    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,

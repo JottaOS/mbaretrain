@@ -37,6 +37,8 @@ export type WorkoutList = ListResponse<Workout>;
 
 export type WorkoutRequest = {
   title: string;
+  sets: number;
+  volume: number;
   startedAt?: string;
   finishedAt?: string;
   isTemplate: boolean;
