@@ -43,13 +43,7 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
             name={`exercises.${exerciseIndex}.details.${setIndex}.distanceMeters`}
             control={form.control}
             render={({ field }) => (
-              <Input
-                {...field}
-                value={field.value?.toString()}
-                onChangeText={field.onChange}
-                keyboardType='decimal-pad'
-                style={styles.input}
-              />
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
             )}
           />
         </View>
@@ -60,13 +54,7 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
             name={`exercises.${exerciseIndex}.details.${setIndex}.reps`}
             control={form.control}
             render={({ field }) => (
-              <Input
-                {...field}
-                value={field.value?.toString()}
-                onChangeText={field.onChange}
-                keyboardType='decimal-pad'
-                style={styles.input}
-              />
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
             )}
           />
         </View>
@@ -77,13 +65,7 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
             name={`exercises.${exerciseIndex}.details.${setIndex}.weight`}
             control={form.control}
             render={({ field }) => (
-              <Input
-                {...field}
-                value={field.value?.toString()}
-                onChangeText={field.onChange}
-                keyboardType='decimal-pad'
-                style={styles.input}
-              />
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
             )}
           />
         </View>
