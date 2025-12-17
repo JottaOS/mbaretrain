@@ -18,17 +18,18 @@ export default function TrainingScreen() {
   const { form } = useWorkoutContext();
 
   const onSubmit = (data: WorkoutFormValues) => {
-    console.log(data);
+    console.log('[successfull submit]', data);
+  };
+
+  const handleDiscard = () => {
+    form.reset();
+    router.replace('/(tabs)');
   };
 
   const watchedExercises = form.watch('exercises', []);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
-        <Button onPress={() => form.reset()}>
-          <Text>Reset form</Text>
-        </Button>
-
         <View style={styles.header}>
           <View>
             <Text style={styles.headerItemLabel}>Duración</Text>
@@ -61,16 +62,38 @@ export default function TrainingScreen() {
           />
         )}
         <View style={styles.footer}>
-          <Button style={styles.button} variant='gradient' onPress={() => router.push('/(training)/exercises')}>
+          <Button style={styles.button} variant='outline' onPress={() => router.push('/(training)/exercises')}>
             <Text> + Agregar ejercicio</Text>
           </Button>
         </View>
+        {watchedExercises.length > 0 && (
+          <View style={styles.screenActions}>
+            <Button style={styles.button} variant='ghost' onPress={handleDiscard}>
+              <Text style={styles.discardButton}>Descartar</Text>
+            </Button>
+            <Button
+              style={styles.button}
+              variant='gradient'
+              onPress={form.handleSubmit(onSubmit, e => console.log(JSON.stringify(e, null, 2)))}
+            >
+              <Text>Terminar</Text>
+            </Button>
+          </View>
+        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  screenActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  discardButton: {
+    color: colors.inputPlaceholder
+  },
   container: {
     flex: 1,
     paddingHorizontal: 20,
