@@ -1,5 +1,4 @@
 import { colors } from '@/constants/colors';
-import { exerciseType } from '@/constants/translations';
 import { Exercise } from '@/types/exercise';
 import { Pressable, StyleSheet } from 'react-native';
 import { Text } from './ui/text';
@@ -14,7 +13,7 @@ export const ExerciseCard = ({ exercise, isSelected, onPress }: ExerciseCardProp
   return (
     <Pressable style={[styles.container, isSelected && styles.active]} onPress={() => onPress(exercise)}>
       <Text style={styles.title}>{exercise.name}</Text>
-      <Text style={styles.type}>{exerciseType[exercise.type]}</Text>
+      <Text style={styles.type}>{exercise.muscle.name}</Text>
     </Pressable>
   );
 };

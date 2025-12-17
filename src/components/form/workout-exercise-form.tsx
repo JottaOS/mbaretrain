@@ -8,6 +8,7 @@ import { getExerciseSetFields } from '@/libs/utils';
 import { SetType } from '@/types/workout';
 import { useFieldArray } from 'react-hook-form';
 import { FlatList, StyleSheet, View } from 'react-native';
+import { Input } from '../ui/input';
 import { ExerciseSetForm } from './exercise-set-form';
 
 interface WorkoutExerciseFormProps {
@@ -40,13 +41,40 @@ export const WorkoutExerciseForm = ({ item, index }: WorkoutExerciseFormProps) =
           <Icon name='trash' size={18} color={colors.danger} />
         </Button>
       </View>
+      <Input
+        placeholder='Agrega notas aquí...'
+        onChangeText={value => form.setValue(`exercises.${index}.notes`, value)}
+        value={item.notes}
+        style={styles.notesInput}
+      />
       <View>
         <View style={styles.tableHeaders}>
-          <Text>Serie</Text>
-          {hasTime && <Text>SERIE</Text>}
-          {hasDistance && <Text>KM</Text>}
-          {hasWeight && <Text>KG</Text>}
-          {hasReps && <Text>REPS</Text>}
+          <View style={styles.colSet}>
+            <Text>Serie</Text>
+          </View>
+          {hasTime && (
+            <View style={styles.colValue}>
+              <Text>TIEMPO</Text>
+            </View>
+          )}
+          {hasDistance && (
+            <View style={styles.colValue}>
+              <Text>KM</Text>
+            </View>
+          )}
+          {hasWeight && (
+            <View style={styles.colValue}>
+              <Text>KG</Text>
+            </View>
+          )}
+          {hasReps && (
+            <View style={styles.colValue}>
+              <Text>REPS</Text>
+            </View>
+          )}
+          <View style={styles.colSet}>
+            <Icon name='check' size={18} color={colors.text} />
+          </View>
         </View>
         <FlatList
           data={watchedItems}
@@ -77,12 +105,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.backgroundSecondary,
     borderRadius: 8
   },
+
   tableHeaders: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: 56,
     marginBottom: 8
+  },
+  colSet: {
+    width: 40,
+    alignItems: 'center'
+  },
+  colValue: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   exerciseName: {
     fontSize: 16,
@@ -95,5 +131,11 @@ const styles = StyleSheet.create({
   },
   appendDetailButton: {
     marginTop: 24
+  },
+  notesInput: {
+    paddingHorizontal: 0,
+    paddingVertical: 0,
+    marginTop: -8,
+    marginBottom: 24
   }
 });

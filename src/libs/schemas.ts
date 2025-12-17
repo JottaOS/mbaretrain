@@ -14,8 +14,9 @@ const workoutExerciseDetailSchema = z.object({
   type: z.enum(SetType),
   reps: z.number().int().min(1).optional(),
   weight: z.number().int().min(1).optional(),
-  distanceMeters: z.number().int().min(1).optional(),
-  durationSeconds: z.number().int().min(1).optional()
+  distanceMeters: z.number().min(1).optional(),
+  durationSeconds: z.number().int().min(1).optional(),
+  isCompleted: z.boolean().default(false)
 });
 
 const workoutExerciseSchema = z

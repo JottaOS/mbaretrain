@@ -3,7 +3,10 @@ import { colors } from '@/constants/colors';
 import { useWorkoutContext } from '@/context/workout-context';
 import { WorkoutFormValues } from '@/libs/schemas';
 import { getExerciseSetFields } from '@/libs/utils';
+import { Checkbox } from 'expo-checkbox';
+import { Controller } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
+import { Input } from '../ui/input';
 
 interface ExerciseSetFormProps {
   item: WorkoutFormValues['exercises'][number]['details'][number];
@@ -18,33 +21,92 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
 
   const { hasTime, hasDistance, hasReps, hasWeight } = getExerciseSetFields(exercise);
 
+  const isOddIndex = setIndex % 2 === 0;
   return (
-    <View>
-      <View style={styles.row}>
+    <View style={[styles.row, { backgroundColor: isOddIndex ? colors.backgroundSecondary : colors.background }]}>
+      <View style={styles.colSet}>
         <Text style={styles.setNumber}>{setIndex + 1}</Text>
-        {hasTime && <Text>{item.durationSeconds}s</Text>}
-        {hasDistance && <Text>{item.distanceMeters ? item.distanceMeters / 1000 : 0}</Text>}
-        {hasReps && <Text>{item.reps}</Text>}
-        {hasWeight && <Text>{item.weight}</Text>}
+      </View>
+      {hasTime && (
+        <View style={styles.colValue}>
+          <Text style={styles.setNumber}>{item.durationSeconds}s</Text>
+        </View>
+      )}
+      {hasDistance && (
+        <View style={styles.colValue}>
+          <Controller
+            name={`exercises.${exerciseIndex}.details.${setIndex}.distanceMeters`}
+            control={form.control}
+            render={({ field }) => (
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
+            )}
+          />
+        </View>
+      )}
+      {hasReps && (
+        <View style={styles.colValue}>
+          <Controller
+            name={`exercises.${exerciseIndex}.details.${setIndex}.reps`}
+            control={form.control}
+            render={({ field }) => (
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
+            )}
+          />
+        </View>
+      )}
+      {hasWeight && (
+        <View style={styles.colValue}>
+          <Controller
+            name={`exercises.${exerciseIndex}.details.${setIndex}.weight`}
+            control={form.control}
+            render={({ field }) => (
+              <Input {...field} value={field.value?.toString()} keyboardType='decimal-pad' style={styles.input} />
+            )}
+          />
+        </View>
+      )}
+      <View style={styles.colSet}>
+        <Controller
+          name={`exercises.${exerciseIndex}.details.${setIndex}.isCompleted`}
+          control={form.control}
+          render={({ field }) => <Checkbox {...field} onValueChange={field.onChange} style={styles.checkbox} />}
+        />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    backgroundColor: colors.backgroundSecondary,
-    borderRadius: 8
-  },
   setNumber: {
-    alignSelf: 'center'
+    textAlign: 'center'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.stepperInactive,
+    paddingVertical: 4,
+    paddingHorizontal: 4,
+    textAlign: 'center'
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    gap: 56,
-    marginBottom: 8
+    paddingVertical: 8
+  },
+  colSet: {
+    width: 40,
+    alignItems: 'center'
+  },
+  colValue: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 4
+  },
+  checkbox: {
+    borderWidth: 1,
+    borderColor: colors.stepperInactive,
+    borderRadius: 4,
+    height: 24,
+    width: 24
   }
 });

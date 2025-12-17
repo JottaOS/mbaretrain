@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   exercisesContainer: {
-    gap: 16
+    gap: 16,
+    paddingBottom: 28
   },
   emptyStateContainer: {
     marginVertical: 64,
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     lineHeight: 24
   },
   footer: {
-    marginVertical: 24,
+    marginVertical: 24
   },
   button: {
     paddingVertical: 16,
