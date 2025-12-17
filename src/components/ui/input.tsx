@@ -1,7 +1,7 @@
 import { colors } from '@/constants/colors';
 import { StyleSheet, TextInput, TextInputProps } from 'react-native';
 
-interface InputProps extends TextInputProps {}
+export interface InputProps extends TextInputProps {}
 
 export const Input = ({ style, ...props }: InputProps) => {
   return (

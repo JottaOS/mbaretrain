@@ -7,6 +7,7 @@ import { Checkbox } from 'expo-checkbox';
 import { Controller } from 'react-hook-form';
 import { StyleSheet, View } from 'react-native';
 import { Input } from '../ui/input';
+import { TimeInput } from '../ui/time-input';
 
 interface ExerciseSetFormProps {
   item: WorkoutFormValues['exercises'][number]['details'][number];
@@ -29,7 +30,11 @@ export const ExerciseSetForm = ({ item, exerciseIndex, setIndex }: ExerciseSetFo
       </View>
       {hasTime && (
         <View style={styles.colValue}>
-          <Text style={styles.setNumber}>{item.durationSeconds}s</Text>
+          <Controller
+            name={`exercises.${exerciseIndex}.details.${setIndex}.durationSeconds`}
+            control={form.control}
+            render={({ field }) => <TimeInput value={field.value} onChange={field.onChange} style={styles.input} />}
+          />
         </View>
       )}
       {hasDistance && (
