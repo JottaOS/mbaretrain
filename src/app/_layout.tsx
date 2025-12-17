@@ -54,7 +54,7 @@ function RootLayoutNav() {
         <Stack.Screen name='(onboarding)/step-2' options={{ headerShown: false }} />
         <Stack.Screen name='(onboarding)/step-3' options={{ headerShown: false }} />
         <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name='(tabs)/(training)' options={{ headerShown: false }} />
+        <Stack.Screen name='(training)' options={{ headerShown: false }} />
         <Stack.Screen name='+not-found' options={{ presentation: 'modal' }} />
       </Stack>
     </ThemeProvider>

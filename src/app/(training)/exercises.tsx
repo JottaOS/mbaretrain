@@ -37,7 +37,7 @@ export default function ExercisesScreen() {
       details: []
     }));
     form.setValue('exercises', formExercises);
-    router.push('/(tabs)/(training)');
+    router.push('/(training)');
   };
 
   const filteredExercises = exercises.filter(exercise => exercise.name.toLowerCase().includes(filter.toLowerCase()));
@@ -90,9 +90,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     position: 'absolute',
-    bottom: 64,
+    bottom: 124,
     left: 0,
     right: 0,
-    padding: 32
+    padding: 32,
+    boxShadow: '4px 4px 16px rgba(0, 0, 0, 0.1)'
   }
 });

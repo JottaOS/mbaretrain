@@ -13,7 +13,7 @@ export const RoutineView = () => {
   const [filter, setFilter] = useState<string>('');
 
   return (
-    <>
+    <View style={styles.container}>
       <Text style={styles.title}>Mis rutinas</Text>
 
       {routines.length === 0 ? (
@@ -36,11 +36,15 @@ export const RoutineView = () => {
           />
         </>
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    borderWidth: 1
+  },
   cardListContainer: {
     gap: 16
   },

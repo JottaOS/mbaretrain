@@ -58,7 +58,7 @@ export default function TrainingScreen() {
         />
       )}
       <View style={styles.footer}>
-        <Button style={styles.button} variant='gradient' onPress={() => router.push('/(tabs)/(training)/exercises')}>
+        <Button style={styles.button} variant='gradient' onPress={() => router.push('/(training)/exercises')}>
           <Text> + Agregar ejercicio</Text>
         </Button>
       </View>
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 24
+    paddingTop: 24
   },
   header: {
     marginBottom: 32,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     lineHeight: 24
   },
   footer: {
-    marginTop: 24
+    marginVertical: 24,
   },
   button: {
     paddingVertical: 16,

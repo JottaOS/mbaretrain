@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
 import { colors } from '@/constants/colors';
 import { useRouter } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
@@ -15,12 +15,10 @@ export default function HomeScreen() {
         {'¡Hola\n'}
         <Text style={styles.username}>Juan!</Text>
       </Text>
-      <Button style={styles.buttonContainer} variant='gradient' onPress={() => router.push('/(tabs)/(training)')}>
+      <Button style={styles.buttonContainer} variant='gradient' onPress={() => router.push('/(training)')}>
         <Text style={styles.buttonText}>Empezar entrenamiento</Text>
       </Button>
-      <View style={styles.routineContainer}>
-        <RoutineView />
-      </View>
+      <RoutineView />
     </SafeAreaView>
   );
 }
@@ -29,10 +27,9 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 48,
+    paddingTop: 48,
     gap: 16
   },
-  routineContainer: {},
   greet: {
     fontSize: 30,
     color: colors.disabled
