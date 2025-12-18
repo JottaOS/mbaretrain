@@ -43,7 +43,7 @@ export default function WorkoutsScreen() {
       <SafeAreaView style={styles.content}>
         {isLoading ? (
           <ActivityIndicator />
-        ) : (
+        ) : sections.length > 0 ? (
           <SectionList
             sections={sections}
             keyExtractor={item => item.id.toString()}
@@ -54,6 +54,8 @@ export default function WorkoutsScreen() {
             stickySectionHeadersEnabled={false}
             showsVerticalScrollIndicator={false}
           />
+        ) : (
+          <Text style={styles.emptyStateTitle}>No hay entrenamientos :c</Text>
         )}
       </SafeAreaView>
     </View>
@@ -79,5 +81,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     marginTop: 24,
     textTransform: 'capitalize'
+  },
+  emptyStateTitle: {
+    fontSize: 18,
+    marginTop: 16,
+    textAlign: 'center'
   }
 });
